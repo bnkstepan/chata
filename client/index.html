@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Chat</title>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-200">
+    <div class="container mx-auto my-8">
+        <input id="input" autocomplete="off" class="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" />
+        <button onclick="chat_message()"
+            class="px-8 rounded-r-lg bg-gray-700  text-gray-200 font-bold p-4 uppercase border-gray-700 border-t border-b border-r">Send</button>
+        <ul id="messages" class="border rounded p-4 overflow-y-auto max-h-64"></ul>
+    </div>
+
+  <script src="socket.io.min.js"></script>
+  <script>
+    const socket = new io("ws://localhost:3000");
+
+    const form = document.getElementById('form');
+    const input = document.getElementById('input');
+    const messages = document.getElementById('messages');
+
+    const chat_message = () => {
+        console.log('chat_message: ', input.value);
+        if (input.value) {
+            socket.emit('chat_message', input.value);
+            input.value = '';
+        }
+    };
+
+    socket.on('chat_message', (msg) => {
+        const item = document.createElement('li');
+        item.textContent = msg;
+        messages.appendChild(item);
+    });
+</script>
+</body>
+</html>
