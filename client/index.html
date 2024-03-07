@@ -26,15 +26,21 @@
         console.log('chat_message: ', input.value);
         if (input.value) {
             socket.emit('chat_message', input.value);
+            emiter(input.value, "bg-green-500");
             input.value = '';
         }
     };
 
     socket.on('chat_message', (msg) => {
+        emiter(msg, "bg-black-100");
+    });
+
+    const emiter = (msg, color) => {
         const item = document.createElement('li');
+        item.classList.add(color)
         item.textContent = msg;
         messages.appendChild(item);
-    });
+    };
 </script>
 </body>
 </html>
