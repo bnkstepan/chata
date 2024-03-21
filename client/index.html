@@ -38,7 +38,8 @@
     };
 
     socket.on('chat_message', (msg) => {
-        emiter(msg, "bg-black-100");
+        let jasne = JSON.parse(msg);
+        emiter(jasne.zprava, "bg-black-100");
     });
 
     const emiter = (msg, color) => {
