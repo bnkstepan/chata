@@ -26,10 +26,11 @@
     const chat_message = () => {
         console.log('chat_message: ', input.value);
         if (input.value) {
-            socket.emit('chat_message', {
+            let jason = JSON.stringify({
                 "zprava": input.value,
                 "poradi": rada,
-            });
+            })
+            socket.emit('chat_message', jason);
             emiter(input.value, "bg-green-500");
             input.value = '';
             rada++;
@@ -37,7 +38,7 @@
     };
 
     socket.on('chat_message', (msg) => {
-        emiter(msg, "bg-black-100");
+        emiter(JSON.parse(msg), "bg-black-100");
     });
 
     const emiter = (msg, color) => {
