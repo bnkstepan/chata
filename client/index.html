@@ -54,9 +54,10 @@
 
     const emiter = (msg, color) => {
         const item = document.createElement('li');
-        item.classList.add(color)
+        item.classList.add(color);
         item.textContent = msg;
-        messages.prependChild(item);
+        // messages.appendChild(item);
+        messages.insertBefore(item, messages.children[0]);
     };
 </script>
 </body>
