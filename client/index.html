@@ -28,7 +28,6 @@
     const input = document.getElementById('input');
     const nameinput = document.getElementById('name-input');
     const messages = document.getElementById('messages');
-    let rada = 0;
 
     const chat_message = () => {
         console.log('chat_message: ', input.value);
@@ -40,7 +39,6 @@
             socket.emit('chat_message', jason);
             emiter(input.value, "bg-green-500");
             input.value = '';
-            rada++;
         }
     };
 
@@ -58,7 +56,7 @@
         const item = document.createElement('li');
         item.classList.add(color)
         item.textContent = msg;
-        messages.appendChild(item);
+        messages.prependChild(item);
     };
 </script>
 </body>
