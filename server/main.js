@@ -14,5 +14,9 @@ io.on('connection', (socket) => {
     console.log('message: ' + msg);
     socket.broadcast.emit('chat_message', msg);
   });
+
+  socket.on('room_message', (rmsg) => {
+    socket.join(rmsg);
+  });
 });
 
