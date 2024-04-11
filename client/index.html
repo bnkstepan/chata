@@ -39,10 +39,11 @@
     const chat_message = () => {
         console.log('chat_message: ', input.value);
         if (input.value) {
-            let jason = JSON.stringify({
+            let jason = {
                 "zprava": input.value,
                 "jmeno": nameinput.value,
-            })
+                "room": roominput.value,
+            }
             socket.emit('chat_message', jason);
             emiter(input.value, "bg-green-500");
             input.value = '';
@@ -61,8 +62,7 @@
     }
 
     socket.on('chat_message', (msg) => {
-        let jasne = JSON.parse(msg);
-        emiter(jasne.jmeno + ": " + jasne.zprava, "bg-black-100");
+        emiter(msg.jmeno + ": " + msg.zprava, "bg-black-100");
     });
 
     const emiter = (msg, color) => {
