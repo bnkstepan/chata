@@ -52,9 +52,11 @@
         }
     }
 
+    let NuMSG;
+
     const chat_message = () => {
         if (input.value) {
-            let NuMSG = new Message(input.value, nameinput.value, roominput.value);
+            NuMSG = new Message(input.value, nameinput.value, roominput.value);
             console.log('chat_message: ', NuMSG);
             socket.emit('chat_message', NuMSG);
             NuMSG.msgemit(input.value, "bg-green-500");
@@ -74,7 +76,7 @@
     }
 
     socket.on('chat_message', (msg) => {
-        emiter(msg.jmeno + ": " + msg.zprava, "bg-black-100");
+        NuMSG.msgemit(msg.name + ": " + msg.contents, "bg-black-100");
     });
 
     //const emiter = (msg, color) => {
